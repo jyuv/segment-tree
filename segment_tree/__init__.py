@@ -1,4 +1,4 @@
 from .SegmentTree import SegmentTree
 from .DualSegmentTree import DualSegmentTree
 
-version = "0.1"
+version = '0.1'

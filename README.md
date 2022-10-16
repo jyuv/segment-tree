@@ -151,7 +151,7 @@ query segment. This means we can continue our tour to `split_node.left.right`
 and return the result of it as the result of the whole left tour.
 <br>
 <p align=center>
-<img src="https://github.com/jyuv/segment_tree/blob/main/assets/case_left_not_intersects.png.png?raw=true">
+<img src="https://github.com/jyuv/segment_tree/blob/main/assets/case_left_not_intersects.png?raw=true">
 </p>
 <br>
 

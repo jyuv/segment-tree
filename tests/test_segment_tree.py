@@ -1,7 +1,6 @@
-import math
 import random
 from functools import reduce
-from segment_tree.SegmentTree import SegmentTree
+from segment_tree.SegmentTree import SegmentTree, func_with_defaults, SpecialVals
 import pytest
 
 
@@ -13,10 +12,11 @@ def addition(x, y):
     return x + y
 
 
-def query_test_arr(test_arr, left, right, operation, default_val):
+def query_test_arr(test_arr, left, right, func):
     if left == right:
         return test_arr[left]
-    return reduce(operation, test_arr[left : right + 1], default_val)
+    f = func_with_defaults(func)
+    return reduce(f, test_arr[left : right + 1], SpecialVals.default)
 
 
 @pytest.fixture
@@ -32,29 +32,28 @@ def small_char_array():
 @pytest.mark.parametrize("left, right", [[0, 9], [6, 0]])
 def test_invalid_query(left, right):
     arr = [10 * i + i for i in range(1, 8)]
-    st = SegmentTree(arr, operation=lambda x, y: x + y, default_val=0)
+    st = SegmentTree(arr, func=lambda x, y: x + y)
     with pytest.raises(ValueError):
         st.query(left, right)
 
 
 def test_query_full_tree(small_int_array):
     right = len(small_int_array) - 1
-    op, default_val = addition, 0
-    st = SegmentTree(small_int_array, op, default_val)
+    st = SegmentTree(small_int_array, func=addition)
     assert st.query(0, right) == query_test_arr(
-        small_int_array, 0, right, op, default_val
+        small_int_array, 0, right, func=addition
     )
 
 
 def test_single_item_tree_query():
     arr = [5]
-    st = SegmentTree(arr, operation=lambda x, y: x + y, default_val=0)
+    st = SegmentTree(arr, func=lambda x, y: x + y)
     assert [st.query(0, 0)] == arr
 
 
-@pytest.mark.parametrize("op, default_val", [[unique_chars, set()], [addition, ""]])
-def test_char_tree_update(small_char_array, op, default_val):
-    st = SegmentTree(small_char_array, op, default_val)
+@pytest.mark.parametrize("func", [unique_chars, addition])
+def test_char_tree_update(small_char_array, func):
+    st = SegmentTree(small_char_array, func)
     for i in range(len(small_char_array)):
         st.update(i, small_char_array[-1 - i])
 
@@ -62,47 +61,41 @@ def test_char_tree_update(small_char_array, op, default_val):
 
 
 @pytest.mark.parametrize(
-    "op, default_val, left, right",
+    "func, left, right",
     [
-        [unique_chars, set(), 0, 7],
-        [unique_chars, set(), 7, 7],
-        [unique_chars, set(), 6, 7],
-        [unique_chars, set(), 0, 4],
-        [unique_chars, set(), 1, 3],
-        [unique_chars, set(), 2, 3],
-        [addition, "", 0, 7],
-        [addition, "", 7, 7],
-        [addition, "", 6, 7],
-        [addition, "", 0, 4],
-        [addition, "", 1, 3],
-        [addition, "", 2, 3],
+        [unique_chars, 0, 7],
+        [unique_chars, 7, 7],
+        [unique_chars, 6, 7],
+        [unique_chars, 0, 4],
+        [unique_chars, 1, 3],
+        [unique_chars, 2, 3],
+        [addition, 0, 7],
+        [addition, 7, 7],
+        [addition, 6, 7],
+        [addition, 0, 4],
+        [addition, 1, 3],
+        [addition, 2, 3],
     ],
 )
-def test_char_tree_query(small_char_array, op, default_val, left, right):
-    st = SegmentTree(small_char_array, op, default_val)
-    assert st.query(left, right) == query_test_arr(
-        small_char_array, left, right, op, default_val
-    )
+def test_char_tree_query(small_char_array, func, left, right):
+    st = SegmentTree(small_char_array, func)
+    assert st.query(left, right) == query_test_arr(small_char_array, left, right, func)
 
 
 def test_big_random_case():
-    ops = [
+    funcs = [
         lambda x, y: x + y,
         lambda x, y: x * y,
         lambda x, y: min(x, y),
         lambda x, y: max(x, y),
     ]
-    default_vals = [0, 1, math.inf, -math.inf]
     arr_len = 500
 
     arr = [random.randint(-10000, 10000) for _ in range(arr_len)]
 
     for _ in range(400):
-        cur_op_id = random.randint(0, 2)
-        cur_op, cur_default_value = ops[cur_op_id], default_vals[cur_op_id]
-        st = SegmentTree(arr, cur_op, cur_default_value)
+        f = funcs[random.randint(0, len(funcs) - 1)]
+        st = SegmentTree(arr, func=f)
         left = random.randint(0, arr_len - 1)
         right = random.randint(left, arr_len - 1)
-        assert st.query(left, right) == query_test_arr(
-            arr, left, right, cur_op, cur_default_value
-        )
+        assert st.query(left, right) == query_test_arr(arr, left, right, func=f)

@@ -14,8 +14,8 @@ class DualSegmentTree:
     """
     A generic data structure used for applying transfromations on segments of items.
     Builds in O(n).
-    Allows for applying an unary operation on segments of items in O(logn) amortized and get items values in O(logn)
-    Supports also series of operations which aren't commutative.
+    Allows for applying an unary function on segments of items in O(logn) amortized and get items values in O(logn)
+    Supports also series of functions which aren't commutative.
     """
 
     def __init__(self, items: List[T]) -> None:

@@ -3,7 +3,7 @@ from typing import Optional, Union
 
 
 class Segment:
-    def __init__(self, left, right) -> None:
+    def __init__(self, left: int, right: int) -> None:
         if left > right:
             raise ValueError(f"Right must be >= Left. Got left={left}, right={right}")
         elif left < 0:

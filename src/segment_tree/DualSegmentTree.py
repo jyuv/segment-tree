@@ -1,6 +1,6 @@
 import math
-from typing import List, Callable, TypeVar
-from segment_tree.TreeNode import TreeNode, Segment
+from typing import Callable, TypeVar, Sequence
+from TreeNode import TreeNode, Segment
 
 T = TypeVar("T")  # input type
 UNARY_FUNC = Callable[[T], T]
@@ -18,7 +18,7 @@ class DualSegmentTree:
     Supports also series of functions which aren't commutative.
     """
 
-    def __init__(self, items: List[T]) -> None:
+    def __init__(self, items: Sequence[T]) -> None:
         self.num_items = len(items)
         self.default_func = id_func
 
@@ -36,8 +36,8 @@ class DualSegmentTree:
         for i in range(self._first_leaf_loc - 1, -1, -1):
             self.arr[i] = self.default_func
 
-    def _is_leaf(self, id: int):
-        return id >= self._first_leaf_loc
+    def _is_leaf(self, node_id: int) -> bool:
+        return node_id >= self._first_leaf_loc
 
     def _push_func(self, func: UNARY_FUNC, node_id: int) -> None:
         if self._is_leaf(node_id):  # is leaf
@@ -50,7 +50,7 @@ class DualSegmentTree:
                 self._push_func(prev_func, 2 * node_id + 2)
             self.arr[node_id] = func
 
-    def _push_existing_to_childs(self, node_id: int):
+    def _push_existing_to_childs(self, node_id: int) -> None:
         if not self._is_leaf(node_id) and self.arr[node_id] != self.default_func:
             # push existing function to child and replace with default
             cur_func = self.arr[node_id]

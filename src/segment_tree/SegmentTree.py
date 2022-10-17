@@ -1,7 +1,7 @@
 from __future__ import annotations
 import math
-from typing import List, Callable, TypeVar, Union
-from segment_tree.TreeNode import TreeNode, Segment
+from typing import List, Callable, TypeVar, Union, Sequence
+from TreeNode import TreeNode, Segment
 from enum import Enum
 
 T = TypeVar("T")  # input type
@@ -31,7 +31,7 @@ class SegmentTree:
     The query supports all binary-associative functions (it doesn't have to be commutative).
     """
 
-    def __init__(self, items: List[T], func: Callable[[TDV, TDV], T]) -> None:
+    def __init__(self, items: Sequence[T], func: Callable[[TDV, TDV], T]) -> None:
         self._f = func_with_defaults(func)
         self._num_items = len(items)
 

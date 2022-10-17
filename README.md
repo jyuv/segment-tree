@@ -66,9 +66,9 @@ st.query(item_id=3) # -9
 arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 def concat_r(x): return x + 'r'
 st = DualSegmentTree(items=arr)
-st.update(left=3, right=5, func=concat_r)  # now the items' values are ['a', 'b', 'c', 'dr', 'er', 'fr', 'g']
-st.query(item_id=1)  # "b"
-st.query(item_id=4)  # "er"
+st.update(left=3, right=5, func=concat_r) # now the items' values are ['a', 'b', 'c', 'dr', 'er', 'fr', 'g']
+st.query(item_id=1) # "b"
+st.query(item_id=4) # "er"
 ```
 
 

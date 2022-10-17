@@ -1,0 +1,24 @@
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seg-tree"
+version = "0.1"
+description = "A generic segment tree and dual segment tree"
+readme = "README.md"
+authors = [{ name = "Yuval Jacoby", email = "jacobyyyuval@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["data structure", "segment", "tree", "graphs", "interval", "range", "query"]
+requires-python = ">=3"
+
+[project.optional-dependencies]
+dev = ["black", "pytest"]
+
+[project.urls]
+Homepage = "https://github.com/jyuv/segment-tree"

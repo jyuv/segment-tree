@@ -118,7 +118,7 @@ An example of a `split_node` is shown below, where the blue node is the split
 node for the segment marked in black. 
 <br>
 <p align=center>
-<img src="https://github.com/jyuv/segment_tree/blob/main/assets/split_node.png?raw=true">
+<img src="https://github.com/jyuv/segment_tree/raw/main/assets/split_node.png?raw=true">
 </p>
 <br>
 
@@ -130,7 +130,7 @@ left child of `split_node` there are 3 options:
 query segment. In this, case the tour is ending with `split_node.left.val`.
 <br>
 <p align=center>
-<img src="https://github.com/jyuv/segment_tree/blob/main/assets/case_contained.png?raw=true">
+<img src="https://github.com/jyuv/segment_tree/raw/main/assets/case_contained.png?raw=true">
 </p>
 <br>
 
@@ -142,7 +142,7 @@ Therefore `split_node.left.right.val` is memorized aside and the tour continues 
 than returns `func(left_val, split_node.left.right.val)` as the left tour's result.
 <br>
 <p align=center>
-<img src="https://github.com/jyuv/segment_tree/blob/main/assets/case_left_intersects.png?raw=true">
+<img src="https://github.com/jyuv/segment_tree/raw/main/assets/case_left_intersects.png?raw=true">
 </p>
 <br>
 
@@ -151,7 +151,7 @@ query segment. This means the tour can be continued to `split_node.left.right`
 and return the result of it as the result of the whole left tour.
 <br>
 <p align=center>
-<img src="https://github.com/jyuv/segment_tree/blob/main/assets/case_left_not_intersects.png?raw=true">
+<img src="https://github.com/jyuv/segment_tree/raw/main/assets/case_left_not_intersects.png?raw=true">
 </p>
 <br>
 
@@ -176,6 +176,6 @@ downwards to their children. An illustration of this in a simple case is shown b
 
 <br>
 <p align=center>
-<img src="https://github.com/jyuv/segment_tree/blob/main/assets/giffy.gif?raw=true">
+<img src="https://github.com/jyuv/segment_tree/raw/main/assets/giffy.gif?raw=true">
 </p>
 <br>

@@ -1,7 +1,7 @@
 import pytest
 import random
 import math
-from segment_tree.DualSegmentTree import DualSegmentTree, id_func
+from DualSegmentTree import DualSegmentTree, id_func
 
 
 def plus_5(x):

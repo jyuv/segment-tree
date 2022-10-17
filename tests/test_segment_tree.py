@@ -1,6 +1,6 @@
 import random
 from functools import reduce
-from segment_tree.SegmentTree import SegmentTree, func_with_defaults, SpecialVals
+from SegmentTree import SegmentTree, func_with_defaults, SpecialVals
 import pytest
 
 

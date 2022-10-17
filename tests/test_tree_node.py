@@ -1,5 +1,5 @@
 import pytest
-from segment_tree.TreeNode import Segment, TreeNode
+from TreeNode import Segment, TreeNode
 
 LEFT_BASIC = 3
 RIGHT_BASIC = 8

@@ -35,14 +35,14 @@ from segment_tree import SegmentTree
 # ints with multiplication function
 arr = [1, 2, 3, 4, 5, 6, 7, 8]
 st = SegmentTree(items=arr, func=lambda x, y: x * y)
-st.update(item_id=3, new_val=9) # now the items' values are [1, 2, 3, 9, 5, 6, 7, 8]
+st.update(item_id=3, new_val=9) # items' values after: [1, 2, 3, 9, 5, 6, 7, 8]
 st.query(left=0, right=2) # 6 (= 1 * 2 * 3)
 st.query(left=2, right=5) # 810 (= 3 * 9 * 5 * 6)
 
 # chars with concatenation function
 arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 st = SegmentTree(items=arr, func=lambda x, y: x + y)
-st.update(item_id=3, new_val='r')  # now the items' values are ['a', 'b', 'c', 'r', 'e', 'f', 'g']
+st.update(item_id=3, new_val='r')  # items' values after: ['a', 'b', 'c', 'r', 'e', 'f', 'g']
 st.query(left=0, right=2)  # "abc"
 st.query(left=2, right=5)  # "cref"
 ```
@@ -57,8 +57,8 @@ from segment_tree import DualSegmentTree
 # Example with ints array
 arr = [1, 2, 3, 4, 5, 6, 7, 8]
 st = DualSegmentTree(arr)
-st.update(left=1, right=3, func=lambda x: x + 5) # now the items' values are [1, 7, 8, 9, 5, 6, 7, 8]
-st.update(left=2, right=4, func=lambda x: -x) # now the items' values are [1, 7, -8, -9, -5, 6, 7, 8]
+st.update(left=1, right=3, func=lambda x: x + 5) # items' values after: [1, 7, 8, 9, 5, 6, 7, 8]
+st.update(left=2, right=4, func=lambda x: -x) # items' values after: [1, 7, -8, -9, -5, 6, 7, 8]
 st.query(item_id=0) # 1
 st.query(item_id=3) # -9
 
@@ -66,7 +66,7 @@ st.query(item_id=3) # -9
 arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 def concat_r(x): return x + 'r'
 st = DualSegmentTree(items=arr)
-st.update(left=3, right=5, func=concat_r) # now the items' values are ['a', 'b', 'c', 'dr', 'er', 'fr', 'g']
+st.update(left=3, right=5, func=concat_r) # items' values after: ['a', 'b', 'c', 'dr', 'er', 'fr', 'g']
 st.query(item_id=1) # "b"
 st.query(item_id=4) # "er"
 ```
